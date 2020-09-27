@@ -1,0 +1,24 @@
+type User {
+    name: String!
+    email: String!
+    role: String!
+    organization: String!
+}
+
+type AccessToken {
+  accessToken: String!
+}
+
+type Query {
+  user: User!
+}
+
+type Mutation {
+  signIn(email: String!, password: String!, organization: String!): AccessToken!
+  signUp(
+    email: String!,
+    password: String!,
+    name: String!,
+    organization: String!,
+  ): AccessToken!
+}
