@@ -12,7 +12,8 @@
         "quotemark": {
             "options": "single",
             "severity": "error"
-        }
+        },
+        "max-classes-per-file": false
     },
     "rulesDirectory": []
 }
