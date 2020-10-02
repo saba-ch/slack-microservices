@@ -10,7 +10,6 @@ import {
   IUser
 } from './userTypes'
 
-
 @Resolver()
 export class UserResolver {
   @Mutation(() => AccessToken)
@@ -23,8 +22,8 @@ export class UserResolver {
     return await userService.signUp(signUpInput)
   }
 
-  @Query(() => IUser)
   @Authorized()
+  @Query(() => IUser)
   user(@CurrentUser() user: UserDoc): IUser {
     return user
   }

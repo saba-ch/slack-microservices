@@ -14,6 +14,10 @@ spec:
             backend:
               serviceName: user-srv
               servicePort: 3000
+          - path: /api/organization/?(.*)
+            backend:
+              serviceName: organization-srv
+              servicePort: 3000
           - path: /?(.*)
             backend:
               serviceName: client-srv

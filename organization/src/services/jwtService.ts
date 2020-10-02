@@ -5,18 +5,6 @@ export interface JWTPayload {
   organization: string
 }
 
-const sign = (userId: string, organization: string): string => {
-  return jwt.sign({
-    id: userId,
-    organization
-  },
-    process.env.JWT_KEY!,
-    {
-      expiresIn: '1 days'
-    }
-  )
-}
-
 const verify = (token: string): JWTPayload => {
   const payload = jwt.verify(token, process.env.JWT_KEY!)
 
@@ -25,5 +13,4 @@ const verify = (token: string): JWTPayload => {
 
 export default {
   verify,
-  sign
 }

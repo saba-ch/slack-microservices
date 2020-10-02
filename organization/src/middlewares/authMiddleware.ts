@@ -1,10 +1,9 @@
 import { Request } from 'express'
 import { AuthChecker, UnauthorizedError } from 'type-graphql'
 
-import userModel, { UserDoc } from '../models/userModel'
-import jwtService from '../services/jwtService'
+import jwtService, { JWTPayload } from '../services/jwtService'
 
-const customAuthChecker: AuthChecker<{ req: Request, user?: UserDoc }> = async ({ context }) => {
+const customAuthChecker: AuthChecker<{ req: Request, user?: JWTPayload }> = async ({ context }) => {
   let { authorization } = context.req.headers
   if (!authorization) throw new Error('Authorization header not provided')
 
@@ -12,8 +11,7 @@ const customAuthChecker: AuthChecker<{ req: Request, user?: UserDoc }> = async (
 
   try {
     const jwtPayload = jwtService.verify(authorization)
-    const user = await userModel.findByIdAndOrg(jwtPayload.id, jwtPayload.organization)
-    context.user = user
+    context.user = jwtPayload
     return true
   } catch (err) {
     throw new UnauthorizedError()
