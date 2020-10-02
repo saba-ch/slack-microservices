@@ -1,11 +1,14 @@
 import {
   ApolloClient,
   DefaultOptions,
-  HttpLink,
-  InMemoryCache
+  InMemoryCache,
+  ApolloLink,
+  HttpLink
 } from '@apollo/client'
-import { setContext } from 'apollo-link-context'
+import { setContext } from '@apollo/link-context'
+import { onError } from '@apollo/link-error'
 
+import config from 'config'
 import { authHelper } from './helpers'
 
 const defaultOptions: DefaultOptions = {
@@ -23,16 +26,25 @@ const defaultOptions: DefaultOptions = {
   }
 }
 
-const authLink: any = setContext((_, { headers }) => ({
+const authLink = setContext((_, { headers }) => ({
   headers: {
     ...headers,
     authorization: `Bearer ${authHelper.getToken()}`
   }
 }))
 
-const httpLink = new HttpLink({ uri: 'http://slack.dev/api/users/graphql' })
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      console.error(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
+    )
 
-const link = authLink.concat(httpLink)
+  if (networkError) console.error(`[Network error]: ${networkError}`)
+})
+
+const httpLink = new HttpLink({ uri: config.apiUrl })
+
+const link = ApolloLink.from([authLink, errorLink, httpLink])
 
 const inMemoryCache = new InMemoryCache()
 

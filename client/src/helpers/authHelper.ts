@@ -1,6 +1,9 @@
 
-const getToken = () => localStorage.getItem('token')
+const getToken = () => localStorage.getItem('accessToken')
+
+const setToken = (token: string) => localStorage.setItem('accessToken', token)
 
 export default {
-  getToken
+  getToken,
+  setToken
 }

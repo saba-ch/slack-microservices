@@ -1,0 +1,7 @@
+#import "accessTokenFragment.graphql"
+
+mutation signUp($data: SignUpInput!) {
+  signUp(data: $data) {
+    ...AccessToken
+  }
+}

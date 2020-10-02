@@ -34,6 +34,7 @@ const signUp = async ({ email, password, organization, name }: SignUpInput): Pro
 
   return { accessToken }
 }
+
 export default {
   signIn,
   signUp,

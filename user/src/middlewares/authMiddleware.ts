@@ -1,5 +1,5 @@
 import { Request } from 'express'
-import { AuthChecker } from 'type-graphql'
+import { AuthChecker, UnauthorizedError } from 'type-graphql'
 import userModel, { UserDoc } from '../models/userModel'
 import jwtService from '../services/jwtService'
 
@@ -9,12 +9,14 @@ const customAuthChecker: AuthChecker<{ req: Request, user?: UserDoc }> = async (
 
   if (authorization.includes('Bearer')) authorization = authorization.slice(7)
 
-  const jwtPayload = jwtService.verify(authorization)
-
-  const user = await userModel.findByIdAndOrg(jwtPayload.id, jwtPayload.organization)
-  context.user = user
-
-  return true
+  try {
+    const jwtPayload = jwtService.verify(authorization)
+    const user = await userModel.findByIdAndOrg(jwtPayload.id, jwtPayload.organization)
+    context.user = user
+    return true
+  } catch (err) {
+    throw new UnauthorizedError()
+  }
 }
 
 export default customAuthChecker
