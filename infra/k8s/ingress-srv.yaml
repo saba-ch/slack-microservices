@@ -10,6 +10,10 @@ spec:
     - host: slack.dev
       http:
         paths:
+          - path: /graphql
+            backend:
+              serviceName: api-gateway-srv
+              servicePort: 3000
           - path: /api/users/?(.*)
             backend:
               serviceName: user-srv
@@ -17,6 +21,10 @@ spec:
           - path: /api/organization/?(.*)
             backend:
               serviceName: organization-srv
+              servicePort: 3000
+          - path: /api/channel/?(.*)
+            backend:
+              serviceName: channel-srv
               servicePort: 3000
           - path: /?(.*)
             backend:

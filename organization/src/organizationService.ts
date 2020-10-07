@@ -41,7 +41,7 @@ const inviteUserToOrganization = async (inviteUserObj: InviteUserToOrganizationI
         role: 'PENDING',
       }
     }
-  })
+  }, { new: true })
   // Todo: send email
 
   return foundOrganization!

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: channel-mongo-depl
+spec:
+  selector:
+    matchLabels:
+      app: channel-mongo
+  template:
+    metadata:
+      labels:
+        app: channel-mongo
+    spec:
+      containers:
+        - name: channel-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: channel-mongo-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: channel-mongo
+  ports:
+    - name: channel-mongo
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

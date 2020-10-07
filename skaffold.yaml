@@ -16,8 +16,24 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: d3bug3r/slack-api-gateway
+      context: api-gateway
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
     - image: d3bug3r/slack-organization
-      context: user
+      context: organization
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: d3bug3r/slack-channel
+      context: channel
       docker:
         dockerfile: Dockerfile
       sync:

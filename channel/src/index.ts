@@ -1,5 +1,5 @@
 import { buildSchema, createResolversMap } from 'type-graphql'
-import { printSchema, buildFederatedSchema } from '@apollo/federation'
+import { buildFederatedSchema, printSchema } from '@apollo/federation'
 import mongoose from 'mongoose'
 import { ApolloServer } from 'apollo-server-express'
 import gql from 'graphql-tag'
@@ -18,18 +18,18 @@ const start = async () => {
     globalMiddlewares: [errorMiddleware]
   })
 
-  const fedSchema = buildFederatedSchema({
+  const fedsSchema = buildFederatedSchema({
     typeDefs: gql(printSchema(schema)),
     resolvers: createResolversMap(schema) as any
   })
 
   const server = new ApolloServer({
-    schema: fedSchema,
+    schema: fedsSchema,
     playground: true,
-    context: ({ req }) => ({ req }),
+    context: ({ req }) => ({ req })
   })
 
-  server.applyMiddleware({ app, path: '/api/users' })
+  server.applyMiddleware({ app, path: '/api/channel' })
 
   await mongoose.connect(process.env.MONGO_URI, {
     useCreateIndex: true,
