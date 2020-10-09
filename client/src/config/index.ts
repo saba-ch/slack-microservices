@@ -18,7 +18,7 @@ switch (process.env.REACT_APP_STAGE!) {
     break
   case 'development':
     config = {
-      apiUrl: 'https://slack.dev/api/users/graphql'
+      apiUrl: 'http://34.72.92.52//api/users/graphql'
     }
     break
   default:

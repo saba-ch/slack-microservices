@@ -1,10 +1,13 @@
 steps:
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install']
+    dir: 'client'
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build:dev']
+    dir: 'client'
   - name: 'gcr.io/ticketing-dev-281211/firebase'
     args: [
       'deploy',
       '--only=hosting'
     ]
+    dir: 'client'
