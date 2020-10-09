@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organization-depl
+spec:
+  selector:
+    matchLabels:
+      app: organization
+  template:
+    metadata:
+      labels:
+        app: organization
+    spec:
+      containers:
+        - name: organization
+          image: d3bug3r/slack-organization
+          env:
+            - name: MONGO_URI
+              value: mongodb://organization-mongo-srv:27017/organization
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: organization-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: organization
+  ports:
+    - name: organization
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
