@@ -1,0 +1,33 @@
+steps:
+  - timeout: 600s
+  - name: gcr.io/cloud-builders/docker
+    args: [
+      'build',
+      '-f',
+      './user/Dockerfile.dev',
+      '-t',
+      'gcr.io/slack-user/slack-user-dev:$BUILD_ID',
+      '.'
+    ]
+  - name: gcr.io/cloud-builders/docker
+    args: [
+      'push',
+      'gcr.io/slack-user/slack-user-dev:$BUILD_ID'
+    ]
+  - name: gcr.io/cloud-builders/kubectl
+    args: [
+      'set',
+      'image',
+      'deployment/user-depl',
+      'd3bug3r/slack-user=gcr.io/slack-user/slack-user-dev:$BUILD_ID',
+    ]
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: Deploy
+    args: [
+      'apply',
+      '-f',
+      'infra/k8s/user-depl.yaml'
+    ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=slack'
