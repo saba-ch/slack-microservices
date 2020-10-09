@@ -1,25 +1,10 @@
 steps:
-  - name: gcr.io/cloud-builders/docker
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build:dev']
+  - name: 'gcr.io/ticketing-dev-281211/firebase'
     args: [
-      'build',
-      '-f',
-      './client/Dockerfile.dev',
-      '-t',
-      'gcr.io/ticketing-dev-281211/slack-client-dev:$BUILD_ID',
-      './client'
+      'deploy',
+      '--only=hosting'
     ]
-  - name: gcr.io/cloud-builders/docker
-    args: [
-      'push',
-      'gcr.io/ticketing-dev-281211/slack-client-dev:$BUILD_ID'
-    ]
-  - name: gcr.io/cloud-builders/kubectl
-    args: [
-      'set',
-      'image',
-      'deployment/client-depl',
-      'slack-client=gcr.io/ticketing-dev-281211/slack-client-dev:$BUILD_ID',
-    ]
-    env:
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=slack'
