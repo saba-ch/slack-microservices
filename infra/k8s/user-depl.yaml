@@ -13,7 +13,7 @@ spec:
         app: user
     spec:
       containers:
-        - name: user
+        - name: slack-user
           image: d3bug3r/slack-user
           env:
             - name: MONGO_URI
