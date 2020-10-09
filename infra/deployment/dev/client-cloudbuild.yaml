@@ -5,7 +5,7 @@ steps:
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build:dev']
     dir: 'client'
-  - name: 'gcr.io/ticketing-dev-281211/firebase'
+  - name: 'gcr.io/cloud-builders/firebase'
     args: [
       'deploy',
       '--only=hosting'
