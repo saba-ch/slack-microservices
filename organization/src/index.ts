@@ -13,7 +13,7 @@ const start = async () => {
   if (!process.env.JWT_KEY) throw new Error('JWT_KEY not provided')
 
   const schema = await buildSchema({
-    resolvers: [__dirname + '/*Resolvers.{ts, js}'],
+    resolvers: [__dirname + '/*Resolvers.{ts,js}'],
     authChecker: authMiddleware,
     globalMiddlewares: [errorMiddleware]
   })
