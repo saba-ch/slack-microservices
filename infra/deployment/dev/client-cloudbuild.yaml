@@ -8,6 +8,7 @@ steps:
   - name: 'gcr.io/ticketing-dev-281211/firebase'
     args: [
       'deploy',
+      '--project=ticketing-dev-281211',
       '--only=hosting'
     ]
     dir: 'client'
