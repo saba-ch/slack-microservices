@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN npm instally=prod
+RUN npm install
 
 COPY . .
 
