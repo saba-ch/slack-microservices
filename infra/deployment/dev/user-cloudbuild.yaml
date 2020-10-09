@@ -6,7 +6,7 @@ steps:
       './user/Dockerfile.dev',
       '-t',
       'gcr.io/slack-user/slack-user-dev:$BUILD_ID',
-      '.'
+      './user'
     ]
   - name: gcr.io/cloud-builders/docker
     args: [
