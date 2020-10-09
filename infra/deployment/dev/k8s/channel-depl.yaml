@@ -12,8 +12,8 @@ spec:
         app: channel
     spec:
       containers:
-        - name: channel
-          image: d3bug3r/slack-channel
+        - name: slack-channel
+          image: gcr.io/ticketing-dev-281211/slack-channel-dev
           env:
             - name: MONGO_URI
               value: mongodb://channel-mongo-srv:27017/channel

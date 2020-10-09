@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: d3bug3r/slack-api-gateway
+          image: gcr.io/ticketing-dev-281211/slack-api-gateway-dev
           env:
             - name: ORGANIZATION_URI
               value: http://organization-srv:3000/api/organization/graphql

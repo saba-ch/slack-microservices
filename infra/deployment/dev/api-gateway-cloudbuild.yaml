@@ -1,13 +1,12 @@
 steps:
-  - timeout: 600s
   - name: gcr.io/cloud-builders/docker
     args: [
       'build',
       '-f',
-      './api-gateway/Dockerfile',
+      './api-gateway/Dockerfile.dev',
       '-t',
       'gcr.io/ticketing-dev-281211/slack-api-gateway-dev:$BUILD_ID',
-      '.'
+      './api-gateway'
     ]
   - name: gcr.io/cloud-builders/docker
     args: [
@@ -19,14 +18,7 @@ steps:
       'set',
       'image',
       'deployment/api-gateway-depl',
-      'd3bug3r/slack-api-gateway=gcr.io/ticketing-dev-281211/slack-api-gateway-dev:$BUILD_ID',
-    ]
-  - name: 'gcr.io/cloud-builders/kubectl'
-    id: Deploy
-    args: [
-      'apply',
-      '-f',
-      'infra/k8s/api-gateway-depl.yaml'
+      'slack-api-gateway=gcr.io/ticketing-dev-281211/slack-api-gateway-dev:$BUILD_ID',
     ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'

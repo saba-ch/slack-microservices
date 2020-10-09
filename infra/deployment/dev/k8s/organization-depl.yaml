@@ -12,8 +12,8 @@ spec:
         app: organization
     spec:
       containers:
-        - name: organization
-          image: d3bug3r/slack-organization
+        - name: slack-organization
+          image: gcr.io/ticketing-dev-281211/slack-organization-dev
           env:
             - name: MONGO_URI
               value: mongodb://organization-mongo-srv:27017/organization

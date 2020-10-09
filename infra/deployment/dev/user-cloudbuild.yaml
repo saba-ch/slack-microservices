@@ -23,13 +23,3 @@ steps:
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=slack'
-  # - name: 'gcr.io/cloud-builders/kubectl'
-  #   id: Deploy
-  #   args: [
-  #     'apply',
-  #     '-f',
-  #     'infra/k8s/user-depl.yaml'
-  #   ]
-  #   env:
-  #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
-  #     - 'CLOUDSDK_CONTAINER_CLUSTER=slack'

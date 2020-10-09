@@ -3,22 +3,22 @@ steps:
     args: [
       'build',
       '-f',
-      './organization/Dockerfile.dev',
+      './client/Dockerfile.dev',
       '-t',
-      'gcr.io/ticketing-dev-281211/slack-organization-dev:$BUILD_ID',
-      './organization'
+      'gcr.io/ticketing-dev-281211/slack-client-dev:$BUILD_ID',
+      './client'
     ]
   - name: gcr.io/cloud-builders/docker
     args: [
       'push',
-      'gcr.io/ticketing-dev-281211/slack-organization-dev:$BUILD_ID'
+      'gcr.io/ticketing-dev-281211/slack-client-dev:$BUILD_ID'
     ]
   - name: gcr.io/cloud-builders/kubectl
     args: [
       'set',
       'image',
-      'deployment/organization-depl',
-      'slack-organization=gcr.io/ticketing-dev-281211/slack-organization-dev:$BUILD_ID',
+      'deployment/client-depl',
+      'slack-client=gcr.io/ticketing-dev-281211/slack-client-dev:$BUILD_ID',
     ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'

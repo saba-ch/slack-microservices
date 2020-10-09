@@ -13,8 +13,8 @@ spec:
         app: client
     spec:
       containers:
-        - name: client
-          image: d3bug3r/client
+        - name: slack-client
+          image: gcr.io/ticketing-dev-281211/slack-client-dev
 ---
 apiVersion: v1
 kind: Service
