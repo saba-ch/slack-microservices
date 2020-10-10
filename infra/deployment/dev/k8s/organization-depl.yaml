@@ -12,7 +12,7 @@ spec:
         app: organization
     spec:
       containers:
-        - name: slack-organization
+        - name: slack-organization-dev
           image: gcr.io/ticketing-dev-281211/slack-organization-dev
           env:
             - name: MONGO_URI

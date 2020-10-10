@@ -12,7 +12,7 @@ spec:
         app: api-gateway
     spec:
       containers:
-        - name: slack-api-gateway
+        - name: slack-api-gateway-dev
           image: gcr.io/ticketing-dev-281211/slack-api-gateway-dev
           env:
             - name: ORGANIZATION_URI

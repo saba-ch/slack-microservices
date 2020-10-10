@@ -12,7 +12,7 @@ spec:
         app: channel
     spec:
       containers:
-        - name: slack-channel
+        - name: slack-channel-dev
           image: gcr.io/ticketing-dev-281211/slack-channel-dev
           env:
             - name: MONGO_URI

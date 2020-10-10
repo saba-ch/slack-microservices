@@ -13,7 +13,7 @@ spec:
         app: user
     spec:
       containers:
-        - name: slack-user
+        - name: slack-user-dev
           image: gcr.io/ticketing-dev-281211/slack-user-dev
           env:
             - name: MONGO_URI

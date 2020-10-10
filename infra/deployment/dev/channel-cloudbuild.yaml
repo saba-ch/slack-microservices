@@ -18,7 +18,7 @@ steps:
       'set',
       'image',
       'deployment/channel-depl',
-      'slack-channel=gcr.io/ticketing-dev-281211/slack-channel-dev:$BUILD_ID',
+      'slack-channel-dev=gcr.io/ticketing-dev-281211/slack-channel-dev:$BUILD_ID',
     ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
