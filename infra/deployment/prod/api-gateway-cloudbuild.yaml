@@ -1,0 +1,27 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: [
+      'build',
+      '-f',
+      './api-gateway/Dockerfile',
+      '-t',
+      'gcr.io/ticketing-dev-281211/slack-api-gateway-prod:$BUILD_ID',
+      './api-gateway'
+    ]
+  - name: gcr.io/cloud-builders/docker
+    args: [
+      'push',
+      'gcr.io/ticketing-dev-281211/slack-api-gateway-prod:$BUILD_ID'
+    ]
+  - name: gcr.io/cloud-builders/kubectl
+    args: [
+      'set',
+      'image',
+      'deployment/api-gateway-depl',
+      'slack-api-gateway-prod=gcr.io/ticketing-dev-281211/slack-api-gateway-prod:$BUILD_ID',
+      '--namespace',
+      'production'
+    ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=slack'

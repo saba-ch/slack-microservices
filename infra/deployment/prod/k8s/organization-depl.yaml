@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organization-depl
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: organization
+  template:
+    metadata:
+      labels:
+        app: organization
+    spec:
+      containers:
+        - name: slack-organization-prod
+          image: gcr.io/ticketing-dev-281211/slack-organization-prod
+          env:
+            - name: MONGO_URI
+              value: mongodb://organization-mongo-srv:27017/organization
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: organization-srv
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: organization
+  ports:
+    - name: organization
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

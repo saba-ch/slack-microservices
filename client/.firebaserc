@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "ticketing-dev-281211"
+  },
+  "targets": {
+    "ticketing-dev-281211": {
+      "hosting": {
+        "ticketing-dev-281211": [
+          "slack-dev",
+          "slack-prod"
+        ]
+      }
+    }
   }
 }

@@ -1,0 +1,27 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: [
+      'build',
+      '-f',
+      './channel/Dockerfile',
+      '-t',
+      'gcr.io/ticketing-dev-281211/slack-channel-prod:$BUILD_ID',
+      './channel'
+    ]
+  - name: gcr.io/cloud-builders/docker
+    args: [
+      'push',
+      'gcr.io/ticketing-dev-281211/slack-channel-prod:$BUILD_ID'
+    ]
+  - name: gcr.io/cloud-builders/kubectl
+    args: [
+      'set',
+      'image',
+      'deployment/channel-depl',
+      'slack-channel-prod=gcr.io/ticketing-dev-281211/slack-channel-prod:$BUILD_ID',
+      '--namespace',
+      'production'
+    ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=slack'

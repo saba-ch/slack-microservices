@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-depl
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: slack-api-gateway-prod
+          image: gcr.io/ticketing-dev-281211/slack-api-gateway-prod
+          env:
+            - name: ORGANIZATION_URI
+              value: http://organization-srv:3000/api/organization/graphql
+            - name: USER_URI
+              value: http://user-srv:3000/api/users/graphql
+            - name: CHANNEL_URI
+              value: http://channel-srv:3000/api/channel/graphql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-srv
+  namespace: production
+spec:
+  selector:
+    app: api-gateway
+  ports:
+    - name: api-gateway
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
