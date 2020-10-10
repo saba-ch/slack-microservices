@@ -1,5 +1,6 @@
 import { buildSchema, createResolversMap } from 'type-graphql'
 import { buildFederatedSchema, printSchema } from '@apollo/federation'
+import { ApolloServerPluginInlineTrace } from 'apollo-server-core'
 import mongoose from 'mongoose'
 import { ApolloServer } from 'apollo-server-express'
 import gql from 'graphql-tag'
@@ -26,7 +27,12 @@ const start = async () => {
   const server = new ApolloServer({
     schema: fedsSchema,
     playground: true,
-    context: ({ req }) => ({ req })
+    context: ({ req }) => ({ req }),
+    plugins: [
+      ApolloServerPluginInlineTrace({
+        rewriteError: (err) => err
+      }),
+    ],
   })
 
   server.applyMiddleware({ app, path: '/api/channel' })
