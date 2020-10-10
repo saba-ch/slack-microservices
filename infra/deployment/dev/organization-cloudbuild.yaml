@@ -19,6 +19,8 @@ steps:
       'image',
       'deployment/organization-depl',
       'slack-organization-dev=gcr.io/ticketing-dev-281211/slack-organization-dev:$BUILD_ID',
+      '--namespace',
+      'development'
     ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
