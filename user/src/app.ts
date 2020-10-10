@@ -6,5 +6,4 @@ const app = express()
 app.set('trust proxy', true)
 app.use(json())
 
-
 export default app

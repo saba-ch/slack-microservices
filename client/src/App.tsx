@@ -6,7 +6,7 @@ import Router from 'Router'
 import Notification from 'components/Notification'
 
 const App: React.FC = () => {
-  const { user, error } = useUser()
+  const { user } = useUser()
 
   return (
     <UserContext.Provider value={{ user }}>
