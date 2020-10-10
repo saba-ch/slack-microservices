@@ -5,9 +5,11 @@
   "targets": {
     "ticketing-dev-281211": {
       "hosting": {
-        "ticketing-dev-281211": [
-          "slack-dev",
+        "slack-prod": [
           "slack-prod"
+        ],
+        "slack-develop": [
+          "slack-develop"
         ]
       }
     }

@@ -9,6 +9,6 @@ steps:
     args: [
       'deploy',
       '--project=ticketing-dev-281211',
-      '--only=hosting:slack-dev'
+      '--only=hosting:slack-develop'
     ]
     dir: 'client'
