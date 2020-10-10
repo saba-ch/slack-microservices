@@ -7,6 +7,7 @@ if (!process.env.ORGANIZATION_URI) throw new Error('ORGANIZATION_URI is required
 if (!process.env.USER_URI) throw new Error('USER_URI is required')
 if (!process.env.CHANNEL_URI) throw new Error('CHANNEL_URI is required')
 
+
 const start = async () => {
   const gateway = new ApolloGateway({
     serviceList: [
