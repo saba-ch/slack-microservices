@@ -8,22 +8,22 @@ let config: Config = {}
 switch (process.env.REACT_APP_STAGE!) {
   case 'staging':
     config = {
-      apiUrl: 'https://slack.dev/api/users/graphql'
+      apiUrl: 'http://slack.website/graphql'
     }
     break
   case 'production':
     config = {
-      apiUrl: 'https://slack.dev/api/users/graphql'
+      apiUrl: 'http://slack.dev/graphql'
     }
     break
   case 'development':
     config = {
-      apiUrl: 'http://slack.website/api/users/graphql'
+      apiUrl: 'http://slack.website/graphql'
     }
     break
   default:
     config = {
-      apiUrl: 'https://slack.dev/api/users/graphql'
+      apiUrl: 'http://slack.website/graphql'
     }
 }
 
