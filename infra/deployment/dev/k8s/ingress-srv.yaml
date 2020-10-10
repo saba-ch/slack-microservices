@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ingress-service
+  namespace: development
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -27,8 +28,4 @@ spec:
             - path: /api/channel/?(.*)
               backend:
                 serviceName: channel-srv
-                servicePort: 3000
-            - path: /?(.*)
-              backend:
-                serviceName: client-srv
                 servicePort: 3000

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api-gateway-depl
+  namespace: development
 spec:
   selector:
     matchLabels:
@@ -26,6 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: api-gateway-srv
+  namespace: development
 spec:
   selector:
     app: api-gateway

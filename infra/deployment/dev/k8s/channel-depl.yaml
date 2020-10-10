@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: channel-depl
+  namespace: development
 spec:
   selector:
     matchLabels:
@@ -27,6 +28,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: channel-srv
+  namespace: development
 spec:
   type: ClusterIP
   selector:
