@@ -9,7 +9,8 @@ metadata:
     networking.gke.io/managed-certificates: slack-ssl
 spec:
   rules:
-      - http:
+      - host: slack.website
+        http:
           paths:
             - path: /graphql
               backend:
