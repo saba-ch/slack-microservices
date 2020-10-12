@@ -17,6 +17,8 @@ spec:
           env:
             - name: MONGO_URI
               value: mongodb://channel-mongo-srv:27017/channel
+            - name: AMQP_URI
+              value: amqp://rabbitmq-srv
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
