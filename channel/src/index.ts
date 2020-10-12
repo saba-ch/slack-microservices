@@ -42,7 +42,7 @@ const start = async () => {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  console.info('Connected to mongo')
+  console.info('Connected to mongodb')
 
   app.listen(3000, () => console.info('Listening on port 3000'))
 }
